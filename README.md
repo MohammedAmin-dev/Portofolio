@@ -2,4 +2,4 @@
 
 My personal portfolio website built with HTML, CSS, JavaScript and Firebase.
 
-🌐 Live: https://codewithaminu.netlify.app
+🌐 Live: https://mohdamin.vercel.app

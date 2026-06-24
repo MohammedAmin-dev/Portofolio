@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohammed Amin | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* === CSS VARIABLES & THEME === */
+        :root {
+            --bg-dark: #0a0e17;
+            --card-bg: #121826;
+            --neon-blue: #3b82f6;
+            --neon-purple: #8b5cf6;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --input-focus-glow: 0 0 15px rgba(59, 130, 246, 0.6), inset 0 0 5px rgba(59, 130, 246, 0.3);
+            --gradient-btn: linear-gradient(135deg, #3b82f6, #8b5cf6);
+        }
+
+        /* === GLOBAL STYLES === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* === NAVIGATION BAR === */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 14, 23, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+        .logo span { color: var(--neon-blue); }
+
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { 
+            font-weight: 500; 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+            padding-bottom: 5px;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-links a:hover { color: var(--neon-blue); text-shadow: 0 0 8px var(--neon-blue); }
+        
+        /* Modern Navigation Focus Highlight */
+        .nav-links a.active-nav {
+            color: var(--neon-blue) !important;
+            text-shadow: 0 0 12px var(--neon-blue);
+            border-bottom: 2px solid var(--neon-blue);
+        }
+
+        .menu-btn { display: none; font-size: 24px; cursor: pointer; }
+
+        /* === SECTIONS WITH SCROLL FOCUS === */
+        section {
+            min-height: 100vh;
+            padding: 140px 10% 80px 10%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 0.5;
+            transform: scale(0.97);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        section.active-section {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 50px;
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+        }
+
+        /* === HOME SECTION === */
+        #home {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 20px;
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--neon-blue);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+            margin-bottom: 15px;
+        }
+
+        .intro-text h1 { font-size: 42px; margin-bottom: 10px; }
+        .intro-text h2 { font-size: 22px; color: var(--neon-blue); margin-bottom: 20px; }
+        .intro-text p { color: var(--text-muted); max-width: 650px; margin: 10px auto; line-height: 1.6; }
+        
+        .info-card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: left;
+            display: inline-block;
+            margin: 25px 0;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .info-card h3 { color: var(--neon-blue); margin-bottom: 12px; }
+        .info-card ul li { margin-bottom: 8px; font-size: 15px; }
+        .info-card i { color: var(--neon-purple); margin-right: 10px; }
+
+        .btn-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 30px;
+            border-radius: 25px;
+            background: var(--gradient-btn);
+            color: white;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+            transition: 0.3s ease;
+        }
+        .btn:hover {
+            box-shadow: 0 0 15px var(--neon-blue);
+            transform: translateY(-2px);
+        }
+
+        /* === INLINE SMOOTH FORM CONTAINER === */
+        .inline-toggle-container {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+        }
+        
+        .inline-toggle-container.show {
+            max-height: 1400px;
+            opacity: 1;
+            margin-top: 25px;
+            margin-bottom: 25px;
+        }
+
+        .form-content-box {
+            background: var(--card-bg);
+            padding: 35px;
+            border-radius: 15px;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+
+        .form-content-box h3 {
+            color: var(--text-main);
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 22px;
+        }
+
+        /* === PREMIUM FLOATING LABEL STYLE SYSTEM === */
+        .input-group {
+            position: relative;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        
+        .input-group input, 
+        .input-group textarea,
+        .input-group select {
+            width: 100%;
+            padding: 15px;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 15px;
+            outline: none;
+            transition: all 0.25s ease-in-out;
+        }
+
+        .input-group label {
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            color: var(--text-muted);
+            font-size: 15px;
+            transition: all 0.25s ease;
+            pointer-events: none;
+            line-height: 1;
+        }
+
+        /* Focus Glow Up & Floating Label Mechanism */
+        .input-group input:focus, 
+        .input-group textarea:focus,
+        .input-group select:focus {
+            border-color: var(--neon-blue) !important;
+            box-shadow: var(--input-focus-glow) !important;
+        }
+
+        .input-group input:focus ~ label, 
+        .input-group input:not(:placeholder-shown) ~ label,
+        .input-group textarea:focus ~ label, 
+        .input-group textarea:not(:placeholder-shown) ~ label,
+        .input-group select:focus ~ label,
+        .input-group select.has-value ~ label {
+            top: -10px; 
+            left: 12px; 
+            font-size: 12px; 
+            color: #3b82f6;
+            background: #0a0e17; 
+            padding: 0 8px; 
+            border-radius: 4px; 
+            font-weight: 600;
+        }
+
+        /* Telegram Style Phone Layout */
+        .tel-container {
+            display: flex;
+            gap: 10px;
+        }
+        .tel-container select {
+            width: 120px;
+            padding: 15px 5px;
+            text-align: center;
+        }
+        .phone-wrapper {
+            position: relative;
+            flex: 1;
+        }
+
+        /* Custom Compatible File Input Box */
+        .custom-file-input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(59, 130, 246, 0.05);
+            border: 1px dashed rgba(59, 130, 246, 0.4);
+            border-radius: 8px;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        /* === ABOUT SECTION === */
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .about-content p {
+            color: var(--text-muted);
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        /* === SKILLS SECTION === */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .skill-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.3s;
+        }
+        .skill-card:hover { border-color: var(--neon-blue); box-shadow: 0 0 15px rgba(59,130,246,0.2); transform: translateY(-5px); }
+        .skill-card h3 { color: var(--neon-purple); margin-bottom: 15px; font-size: 18px; }
+        .skill-card p { color: var(--text-muted); margin-bottom: 8px; font-size: 14px; line-height: 1.5; }
+        .skill-card i { color: var(--neon-blue); margin-right: 8px; }
+
+        /* === PROJECTS SECTION === */
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .project-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.05);
+            text-align: center;
+            transition: 0.3s;
+        }
+        .project-card:hover { border-color: var(--neon-purple); box-shadow: 0 0 15px rgba(139,92,246,0.2); }
+        .project-card i { font-size: 38px; color: var(--neon-blue); margin-bottom: 15px; }
+        .project-card h3 { margin-bottom: 10px; font-size: 18px; }
+        .project-card p { font-size: 14px; color: var(--text-muted); margin-bottom: 15px; }
+        .project-card a { color: var(--neon-blue); font-size: 14px; font-weight: 500; }
+        .project-card a:hover { text-decoration: underline; }
+
+        /* === CONTACT SECTION === */
+        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 20px; }
+        .contact-card {
+            background: var(--card-bg);
+            padding: 20px 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.3s ease;
+        }
+        .contact-card:hover { border-color: var(--neon-blue); box-shadow: 0 0 12px rgba(59,130,246,0.3); transform: scale(1.03); }
+        .contact-card i { font-size: 26px; color: var(--neon-blue); margin-bottom: 8px; }
+        .contact-card h4 { font-size: 13px; color: var(--text-muted); margin-bottom: 4px; }
+        .contact-card p { font-size: 12px; word-break: break-all; }
+
+        /* === FOOTER === */
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: var(--card-bg);
+            color: var(--text-muted);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 14px;
+        }
+        footer span { color: var(--neon-blue); font-weight: 600; }
+
+        /* === BACK TO TOP BUTTON === */
+        .floating-icons { position: fixed; bottom: 25px; right: 25px; z-index: 1000; }
+        .float-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--gradient-btn);
+            color: white;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .float-btn:hover { box-shadow: 0 0 15px var(--neon-blue); transform: scale(1.08); }
+
+        /* === HIDDEN CV TEMPLATE SETUP === */
+        #cvPrintArea { display: none; }
+
+        /* STABLE DEFENSIVE 1-PAGE CV PRINT OVERRIDES */
+        @media print {
+            body * { display: none !important; }
+            #cvPrintArea, #cvPrintArea * { display: block !important; }
+            #cvPrintArea {
+                position: absolute; left: 0; top: 0; width: 100%; color: #111111 !important; background: #ffffff !important; padding: 20px !important; display: block !important;
+                font-family: 'Poppins', sans-serif;
+            }
+            .cv-header { display: flex !important; align-items: center !important; gap: 15px !important; border-bottom: 2px solid #333333 !important; padding-bottom: 10px; margin-bottom: 15px; }
+            .cv-img { width: 95px !important; height: 95px !important; border-radius: 50% !important; object-fit: cover !important; display: block !important; border: 2px solid #333; }
+            .cv-grid { display: grid !important; grid-template-columns: 1.1fr 0.9fr !important; gap: 15px !important; }
+            .cv-section { margin-bottom: 12px !important; page-break-inside: avoid; }
+            .cv-section h3 { border-bottom: 1px solid #555555; padding-bottom: 3px; margin-bottom: 6px; font-size: 13px; color: #111111; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+            .cv-section p, .cv-section li { font-size: 11px !important; color: #222222 !important; line-height: 1.4; }
+            .cv-section ul { list-style: square; padding-left: 12px; }
+        }
+
+        /* === RESPONSIVE LAYOUT === */
+        @media (max-width: 768px) {
+            nav { padding: 15px 20px; }
+            .menu-btn { display: block; }
+            .nav-links {
+                position: fixed; top: 0; right: -100%; width: 70%; height: 100vh;
+                background: rgba(10, 14, 23, 0.98); flex-direction: column;
+                justify-content: center; align-items: center; transition: 0.4s ease;
+                border-left: 1px solid rgba(255,255,255,0.1);
+            }
+            .nav-links.active { right: 0; }
+            .nav-links li { margin: 25px 0; }
+            .close-btn { position: absolute; top: 20px; right: 20px; font-size: 28px; cursor: pointer; }
+            section { padding: 120px 5% 60px 5%; }
+            .intro-text h1 { font-size: 32px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">Aminu<span>.</span></div>
+        <ul class="nav-links" id="navLinks">
+            <i class="fas fa-times close-btn" id="closeMenu"></i>
+            <li><a href="#home" class="nav-item">Home</a></li>
+            <li><a href="#about" class="nav-item">About</a></li>
+            <li><a href="#skill" class="nav-item">Skills</a></li>
+            <li><a href="#projects" class="nav-item">Projects</a></li>
+            <li><a href="#contact" class="nav-item">Contact Me</a></li>
+        </ul>
+        <i class="fas fa-bars menu-btn" id="openMenu"></i>
+    </nav>
+
+    <section id="home" class="active-section">
+        <img src="aminu.jpg" alt="Mohammed Amin" class="profile-img">
+        
+        <div class="intro-text">
+            <h1>I'm Mohammed Amin</h1>
+            <h2>Full-Stack Web Developer from Dessie, Ethiopia 🇪🇹</h2>
+            <p>I specialize in building modern web applications using HTML, CSS, JavaScript, Firebase, PHP, and Python.</p>
+            <p>🚀 Currently building <strong>Code With Aminu</strong> — a web development learning platform.</p><br>
+            <p>🕰️ Currently, I am available for any web development projects, collaborations, and freelance work...</p>
+            <p><a href="#contact" style="color: var(--neon-blue); text-decoration: underline;">Contact Me</a></p>
+            
+            <div class="info-card">
+                <h3>💡 What I do:</h3>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> Frontend Engineering (HTML, CSS, JavaScript)</li>
+                    <li><i class="fas fa-check-circle"></i> Backend Development (PHP, Python, Firebase)</li>
+                    <li><i class="fas fa-check-circle"></i> Database & SQL Management (Firebase Realtime Database)</li>
+                    <li><i class="fas fa-check-circle"></i> User Authentication & System Security</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="btn-container">
+            <button class="btn" id="toggleProjectForm">
+                <i class="fas fa-rocket"></i> Build a Project
+            </button>
+            <button class="btn" onclick="window.print();">
+                <i class="fas fa-download"></i> Download My CV
+            </button>
+        </div>
+
+        <div class="inline-toggle-container" id="projectFormContainer">
+            <div class="form-content-box">
+                <h3>🚀 Let's Build Your Project</h3>
+                <form id="projectForm">
+                    <div class="input-group">
+                        <input type="text" id="fullName" placeholder=" " required>
+                        <label for="fullName">Full Name *</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="email" id="email" placeholder=" " required>
+                        <label for="email">Email Address *</label>
+                    </div>
+                    
+                    <div class="input-group">
+                        <div class="tel-container">
+                            <select id="countryCode">
+                                <option value="+251">🇪🇹 +251</option>
+                                <option value="+1">🇺🇸 +1</option>
+                                <option value="+44">🇬🇧 +44</option>
+                                <option value="+49">🇩🇪 +49</option>
+                                <option value="+254">🇰🇪 +254</option>
+                                <option value="+249">🇸🇩 +249</option>
+                                <option value="+253">🇩ジタル +253</option>
+                                <option value="+252">🇸🇴 +252</option>
+                                <option value="+966">🇸🇦 +966</option>
+                                <option value="+971">🇦酋 +971</option>
+                                <option value="+91">🇮🇳 +91</option>
+                                <option value="+86">🇨🇳 +86</option>
+                                <option value="+27">🇿🇦 +27</option>
+                                <option value="+20">🇪🇬 +20</option>
+                                <option value="+33">🇫ىرى +33</option>
+                            </select>
+                            <div class="phone-wrapper">
+                                <input type="tel" id="phone" placeholder=" " required>
+                                <label for="phone">Phone Number *</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <select id="projectType" required>
+                            <option value="" disabled selected hidden></option>
+                            <option value="Website">Website</option>
+                            <option value="Mobile App">Mobile App</option>
+                            <option value="ERP System">ERP System</option>
+                            <option value="Backend Server">Backend Server</option>
+                            <option value="Database Administration">Database Administration</option>
+                            <option value="BaaS">BaaS (Backend as a Service)</option>
+                            <option value="Firebase Administration and Authentication">Firebase Administration & Authentication</option>
+                            <option value="Digital Menu">Digital Menu</option>
+                            <option value="School Management">School Management System</option>
+                            <option value="Restaurant/Hotel">Restaurant/Hotel Management System</option>
+                            <option value="Admin Panel">Admin Panel</option>
+                            <option value="Other">Other Project</option>
+                        </select>
+                        <label for="projectType">What Would You Like To Build? *</label>
+                    </div>
+
+                    <div class="input-group" style="padding-top: 5px;">
+                        <label style="position: static; font-size:13px; color:var(--text-muted); display:block; margin-bottom:8px;">Upload Project Requirements Image/Screenshot (Optional)</label>
+                        <input type="file" id="projectFile" class="custom-file-input" accept="image/*">
+                    </div>
+
+                    <div class="input-group">
+                        <textarea id="description" rows="4" placeholder=" " required></textarea>
+                        <label for="description">Description About The Project *</label>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%; justify-content: center;">
+                        <i class="fas fa-paper-plane"></i> Submit Project
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+            <p>I am <strong>Mohammed Amin</strong>, a highly motivated and skilled Full-Stack Web Developer based in Dessie, Ethiopia. Currently, I am expanding my technical foundation as a software engineering student while actively engineering real-world software solutions.</p>
+            <p>My passion lies in crafting high-performance websites, handling complex database setups, and securing authentication workflows. Through my platform, <strong>Code With Aminu</strong>
+          
+        </div>
+    </section>
+
+    <section id="skill">
+        <h2 class="section-title">Skills & Education</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <h3><i class="fas fa-school"></i> Education</h3>
+                <p><strong>Software Engineering Student</strong></p>
+                <p>Second-Year Software Engineering Studies</p><br>
+                <p><strong>High School & Preparatory</strong></p>
+                <p>HSPS (Hotei Secondary and Preparatory School)</p>
+                <p>Dessie, Ethiopia</p>
+            </div>
+            <div class="skill-card">
+                <h3><i class="fas fa-laptop-code"></i> Professional Training</h3>
+                <p><strong>WSPC...WDDBA</strong></p>
+                <p>Web Development and Database Administration</p>
+                <p>Ministry of Labour and Skills (MoLS) Program</p><br>
+                <p>Acquired comprehensive skills in application engineering and architecture.</p>
+            </div>
+            <div class="skill-card">
+                <h3><i class="fas fa-certificate"></i> Certifications</h3>
+                <p><i class="fas fa-award"></i> Original Certificate on Networking and Maintenance</p>
+                <p><i class="fas fa-award"></i> Basic Digital Literacy From ARNS</p>
+                <p><i class="fas fa-award"></i> Professional Certificate on JavaScript (JS)</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2 class="section-title">My Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <i class="fas fa-utensils"></i>
+                <h3>Full Restaurant System</h3>
+                <p>A complete modern digital menu and restaurant operation solution.</p>
+                <p>Comes with a secure, responsive, and clear Admin Page.</p><br>
+                <a href="https://aminudigital.netlify.app" target="_blank">Live Site Link <i class="fas fa-external-link-alt"></i></a>
+            </div>
+            <div class="project-card">
+                <i class="fas fa-code"></i>
+                <h3>Code With Aminu</h3>
+                <p>A web development challenge platform engineered for tech learners.</p>
+                <p>Building Full-Stack websites efficiently in 3 days:</p>
+                <p style="font-size: 12px; color: var(--text-muted);">Day 1: Basic HTML, CSS, & JS | Day 2: BaaS, PHP, & Python | Day 3: Deploying on Netlify, InfinityFree, & Vercel</p><br>
+                <a href="https://codewithaminu.netlify.app" target="_blank">Live Site Link <i class="fas fa-external-link-alt"></i></a>
+            </div>
+            <div class="project-card">
+                <i class="fab fa-telegram-plane"></i>
+                <h3>Programming and Logic</h3>
+                <p>My Web Development In 3 Days Challenge Telegram Channel.</p>
+                <p>Features essential tips about website security, backend operations, and user authentication.</p><br>
+                <a href="https://t.me/codewithaminu" target="_blank">Join Channel <i class="fas fa-external-link-alt"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Contact Me</h2>
+        <div class="contact-grid">
+            <div class="contact-card" style="border-color: var(--neon-purple);">
+                <i class="fas fa-map-marker-alt" style="color: var(--neon-purple);"></i>
+                <h4>Location</h4>
+                <p>Dessie, Ethiopia</p>
+            </div>
+            <a href="tel:+251977215010" class="contact-card">
+                <i class="fas fa-phone-alt"></i>
+                <h4>Phone No</h4>
+                <p>+251977215010</p>
+            </a>
+            <a href="mailto:aminulegend17@gmail.com" class="contact-card">
+                <i class="fas fa-envelope"></i>
+                <h4>Email</h4>
+                <p>aminulegend17@gmail.com</p>
+            </a>
+            <a href="https://t.me/mameamin1" target="_blank" class="contact-card">
+                <i class="fab fa-telegram-plane"></i>
+                <h4>Telegram</h4>
+                <p>@mameamin1</p>
+            </a>
+            <a href="https://t.me/codewithaminu" target="_blank" class="contact-card">
+                <i class="fas fa-bullhorn"></i>
+                <h4>Channel</h4>
+                <p>codewithaminu</p>
+            </a>
+            <a href="https://www.tiktok.com/@mame_amin" target="_blank" class="contact-card">
+                <i class="fab fa-tiktok"></i>
+                <h4>TikTok</h4>
+                <p>@mame_amin</p>
+            </a>
+            <a href="https://github.com/MohammedAmin-dev" target="_blank" class="contact-card">
+                <i class="fab fa-github"></i>
+                <h4>GitHub</h4>
+                <p>MohammedAmin-dev</p>
+            </a>
+            <a href="https://www.linkedin.com/in/mohammed-amin-79899b418" target="_blank" class="contact-card">
+                <i class="fab fa-linkedin-in"></i>
+                <h4>LinkedIn</h4>
+                <p>Mohammed Amin</p>
+            </a>
+        </div>
+    </section>
+
+    <div style="background: var(--bg-dark); padding: 40px 10% 40px 10%; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.05);">
+        
+        <div style="margin-bottom: 30px;">
+            <button class="btn" id="toggleFeedbackForm" style="background: transparent; border: 2px solid var(--neon-blue); box-shadow: none; margin: 0 auto;">
+                <i class="far fa-comment-dots"></i> Click Here to Write Feedback
+            </button>
+        </div>
+
+        <div class="inline-toggle-container" id="feedbackFormContainer">
+            <div class="form-content-box" style="border-color: var(--neon-purple); max-width: 500px; margin: 0 auto 35px auto;">
+                <h3>Feedback Section</h3>
+                <form id="feedbackForm">
+                    <div class="input-group">
+                        <input type="text" id="fbName" placeholder=" " required>
+                        <label for="fbName">Name.........</label>
+                    </div>
+                    <div class="input-group">
+                        <textarea id="fbComment" rows="4" placeholder=" " required></textarea>
+                        <label for="fbComment">Feedback.....</label>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%; justify-content: center;">
+                        <i class="fas fa-comments"></i> Submit Feedback
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 35px;">
+            <a href="javascript:void(0)" id="toggleBugReport" style="font-size: 14px; color: #ef4444; text-decoration: underline; font-weight: 600; transition: 0.3s;">
+                <i class="fas fa-bug"></i> Report Bug
+            </a>
+        </div>
+
+        <div class="inline-toggle-container" id="bugReportContainer">
+            <div class="form-content-box" style="border-color: #ef4444; max-width: 500px; margin: 0 auto 10px auto;">
+                <h3 style="color: #ef4444; margin-bottom:20px;"><i class="fas fa-exclamation-triangle"></i> Report Any Bug Here.......</h3>
+                <form id="bugForm">
+                    <div class="input-group">
+                        <textarea id="bugDescription" placeholder=" " required></textarea>
+                        <label for="bugDescription">The Bug is...........</label>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%; justify-content: center; background: linear-gradient(135deg, #ef4444, #b91c1c); box-shadow: 0 4px 15px rgba(239,68,68,0.2);">
+                        Submit Report
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 Mohd Amin All rights reserved. <br> Developed by <span>Aminu</span></p>
+    </footer>
+
+    <div class="floating-icons">
+        <div class="float-btn" id="scrollTop" title="Go to Top">
+            <i class="fas fa-arrow-up"></i>
+        </div>
+    </div>
+
+    <div id="cvPrintArea">
+        <div class="cv-header">
+            <img src="aminu.jpg" alt="Mohammedamin Ahmed Seid" class="cv-img">
+            <div>
+                <h2 style="font-size: 22px; margin-bottom: 2px; color: #111;">Mohammedamin Ahmed Seid</h2>
+                <p style="font-size: 13px; font-weight: 600; color: #3b82f6; text-transform: uppercase; letter-spacing: 0.5px;">Full-Stack Web Developer & Software Engineering Student</p>
+                <p style="font-size: 11px; margin-top: 3px; color: #444;">Dessie, Ethiopia | aminulegend17@gmail.com | +251977215010</p>
+                <p style="font-size: 10px; color: #666; margin-top: 1px;">GitHub: github.com/MohammedAmin-dev | LinkedIn: linkedin.com/in/mohammed-amin-79899b418</p>
+            </div>
+        </div>
+        <div class="cv-grid">
+            <div>
+                <div class="cv-section">
+                    <h3>Profile</h3>
+                    <p>Energetic and solution-driven Full-Stack Web Developer and Second-Year Software Engineering student. Experienced in building scalable user interfaces and integrating clean backend infrastructure using JavaScript, Firebase, PHP, and Python.</p>
+                </div>
+                <div class="cv-section">
+                    <h3>Education</h3>
+                    <p><strong>Bachelor of Software Engineering</strong> (2025 - Present)</p>
+                    <p style="color: #444; font-size: 11px;">Wollo University, KIOT</p>
+                    <p style="margin-top: 5px;"><strong>High School - Natural Science</strong> (2020 - 2024)</p>
+                    <p style="color: #444; font-size: 11px;">Hara High School & HSPS, Dessie, Ethiopia</p>
+                </div>
+                <div class="cv-section">
+                    <h3>Professional Training</h3>
+                    <p><strong>WSPC...WDDBA Training Program</strong></p>
+                    <p style="color: #444; font-size: 11px;">Comprehensive course in Web Development and Database Administration hosted by the Ministry of Labour and Skills (MoLS).</p>
+                </div>
+            </div>
+            <div>
+                <div class="cv-section">
+                    <h3>Core Technical Skills</h3>
+                    <ul>
+                        <li>Frontend Engineering (HTML5, CSS3, ES6+ JavaScript)</li>
+                        <li>Backend Architecture (PHP, Python Development)</li>
+                        <li>Database Operations (Firebase Realtime Database, SQL)</li>
+                        <li>Systems (User Authentication, Responsive UI Design, C++)</li>
+                    </ul>
+                </div>
+                <div class="cv-section">
+                    <h3>Certifications</h3>
+                    <ul>
+                        <li>Professional Developer Certificate on JavaScript (JS)</li>
+                        <li>Original Certificate on Networking and System Maintenance</li>
+                        <li>Basic Digital Literacy Certification — ARNS</li>
+                    </ul>
+                </div>
+                <div class="cv-section">
+                    <h3>Key Handled Projects</h3>
+                    <p><strong>Full Restaurant Menu & Operation Platform</strong></p>
+                    <p style="color: #555; font-size: 11px; margin-bottom: 4px;">https://aminudigital.netlify.app</p>
+                    <p><strong>Code With Aminu Tech Learning Hub</strong></p>
+                    <p style="color: #555; font-size: 11px;">https://codewithaminu.netlify.app</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+
+    <script>
+        // AUTHENTIC AUTHORITATIVE LIVE CREDENTIALS FROM SCREENSHOT DATA
+        const firebaseConfig = {
+            apiKey: "AIzaSyCikBOsjS-yl9JgSADo_zo9sxZ5rZRfxtk",
+            authDomain: "mohdamin-portofolio.firebaseapp.com",
+            databaseURL: "https://mohdamin-portofolio-default-rtdb.firebaseio.com",
+            projectId: "mohdamin-portofolio",
+            storageBucket: "mohdamin-portofolio.firebasestorage.app",
+            messagingSenderId: "906870865232",
+            appId: "1:906870865232:web:82618904ac2d520e360055",
+            measurementId: "G-VEFNJV7G42"
+        };
+        
+        // Initialize Firebase Web App Module Instance Instantly
+        firebase.initializeApp(firebaseConfig);
+
+        // UI View Element Selection Elements
+        const openMenu = document.getElementById('openMenu');
+        const closeMenu = document.getElementById('closeMenu');
+        const navLinks = document.getElementById('navLinks');
+        const navItems = document.querySelectorAll('.nav-item');
+        const sections = document.querySelectorAll('section');
+
+        const toggleProjectBtn = document.getElementById('toggleProjectForm');
+        const projectFormContainer = document.getElementById('projectFormContainer');
+        const toggleFeedbackBtn = document.getElementById('toggleFeedbackForm');
+        const feedbackFormContainer = document.getElementById('feedbackFormContainer');
+        const toggleBugBtn = document.getElementById('toggleBugReport');
+        const bugReportContainer = document.getElementById('bugReportContainer');
+        const selectDropdowns = document.querySelectorAll('.input-group select');
+
+        // Helper to display clean status messages without styles corruption
+        function displayStatus(formElement, textMessage, isSuccess) {
+            // Remove previous status message instances if any
+            const oldMessage = formElement.querySelector('.live-status-box');
+            if (oldMessage) oldMessage.remove();
+
+            const statusDiv = document.createElement('div');
+            statusDiv.className = 'live-status-box';
+            statusDiv.style.marginTop = '20px';
+            statusDiv.style.fontSize = '14px';
+            statusDiv.style.fontWeight = '500';
+            statusDiv.style.textAlign = 'center';
+            statusDiv.style.lineHeight = '1.6';
+            statusDiv.style.color = isSuccess ? '#10b981' : '#ef4444'; // Green vs Red color systems
+            statusDiv.innerHTML = textMessage;
+            formElement.appendChild(statusDiv);
+        }
+
+        // Clean status boxes resets
+        function clearStatus(formElement) {
+            const oldMessage = formElement.querySelector('.live-status-box');
+            if (oldMessage) oldMessage.remove();
+        }
+
+        // Manage Mobile Menu Views
+        openMenu.addEventListener('click', () => navLinks.classList.add('active'));
+        closeMenu.addEventListener('click', () => navLinks.classList.remove('active'));
+        navItems.forEach(link => link.addEventListener('click', () => navLinks.classList.remove('active')));
+
+        // Inline Layout Toggle Engine Action Operations
+        toggleProjectBtn.addEventListener('click', () => projectFormContainer.classList.toggle('show'));
+        toggleFeedbackBtn.addEventListener('click', () => feedbackFormContainer.classList.toggle('show'));
+        toggleBugBtn.addEventListener('click', () => bugReportContainer.classList.toggle('show'));
+
+        // Keep Select Labels Floated if a Value is Selected
+        selectDropdowns.forEach(select => {
+            select.addEventListener('change', () => {
+                if (select.value !== "") {
+                    select.classList.add('has-value');
+                } else {
+                    select.classList.remove('has-value');
+                }
+            });
+        });
+
+        // Smart Filter to Strip Initial Zero on Phone Elements
+        const phoneInput = document.getElementById('phone');
+        phoneInput.addEventListener('input', () => {
+            if (phoneInput.value.startsWith('0')) {
+                phoneInput.value = phoneInput.value.substring(1);
+            }
+        });
+
+        // Scroll-Spy Focus Navigation Movement Engine Tracker
+        const scrollTopBtn = document.getElementById('scrollTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) {
+                scrollTopBtn.style.display = 'flex';
+            } else {
+                scrollTopBtn.style.display = 'none';
+            }
+
+            let activeId = "";
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= (sectionTop - sectionHeight / 2.5)) {
+                    activeId = section.getAttribute('id');
+                }
+            });
+
+            sections.forEach(section => {
+                if (section.getAttribute('id') === activeId) {
+                    section.classList.add('active-section');
+                } else {
+                    section.classList.remove('active-section');
+                }
+            });
+
+            navItems.forEach(item => {
+                item.classList.remove('active-nav');
+                if (item.getAttribute('href') === `#${activeId}`) {
+                    item.classList.add('active-nav');
+                }
+            });
+        });
+
+        scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        // 1. Project Request Submission Script Node (ተጠቃሚው የሚሰቅለው ምስል በቀጥታ ወደ ImgBB ሄዶ ሊንኩ Firebase ላይ ይገባል!)
+        document.getElementById('projectForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const form = e.target;
+            const nameVal = document.getElementById('fullName').value;
+            const submitBtn = form.querySelector('button[type="submit"]');
+
+            clearStatus(form);
+
+            // Network State Verification Check Gateway
+            if (!navigator.onLine) {
+                displayStatus(form, "Please connect to the Internet and try again", false);
+                return;
+            }
+
+            const initialBtnText = submitBtn.innerHTML;
+            submitBtn.innerHTML = " Submitting..........";
+            submitBtn.disabled = true;
+
+            const fileEl = document.getElementById('projectFile');
+            const file = fileEl.files[0];
+            let fileUrlOrName = "No file uploaded";
+
+            try {
+                // ፋይል ከተመረጠ መጀመሪያ ወደ ImgBB በስተጀርባ ሰቅሎ ሊንኩን መቀበል
+                if (file) {
+                    const IMGBB_API_KEY = "058e2115d7ca64e8bf1fcf6acd33a8d4"; // ያንተ ቁልፍ ገብቷል
+                    const formData = new FormData();
+                    formData.append('image', file);
+
+                    const imgbbResponse = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    if (imgbbResponse.ok) {
+                        const imgbbData = await imgbbResponse.json();
+                        fileUrlOrName = imgbbData.data.url; // እውነተኛው የፎቶ .jpg/.png ሊንክ
+                    } else {
+                        console.log("ImgBB Upload failed, sending only name.");
+                        fileUrlOrName = file.name + " (Upload Failed)";
+                    }
+                }
+
+                // መረጃውን ወደ Firebase Realtime Database መላክ
+                const combinedPhone = document.getElementById('countryCode').value + document.getElementById('phone').value;
+                const projectPayload = {
+                    Name: nameVal,
+                    Email: document.getElementById('email').value,
+                    "Phone no": combinedPhone,
+                    Build: document.getElementById('projectType').value,
+                    "File about Project": fileUrlOrName, // አሁን እውነተኛው ሊንክ እዚህ ይቀመጣል!
+                    "Description about Project": document.getElementById('description').value,
+                    Timestamp: Date.now()
+                };
+
+                await firebase.database().ref('PROJECTS/Users').push(projectPayload);
+                
+                displayStatus(form, `Dear ${nameVal} Your Project Request is Submitted successfully!`, true);
+                form.reset();
+                selectDropdowns.forEach(s => s.classList.remove('has-value'));
+                setTimeout(() => projectFormContainer.classList.remove('show'), 3500);
+
+            } catch (err) {
+                displayStatus(form, "Error: " + err.message, false);
+            } finally {
+                submitBtn.innerHTML = initialBtnText;
+                submitBtn.disabled = false;
+            }
+        });
+
+        // 2. Feedback Form Submission Script Node
+        document.getElementById('feedbackForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const form = e.target;
+            const fbNameVal = document.getElementById('fbName').value;
+            const submitBtn = form.querySelector('button[type="submit"]');
+
+            clearStatus(form);
+
+            if (!navigator.onLine) {
+                displayStatus(form, "Please connect to the internet and try again", false);
+                return;
+            }
+
+            const initialBtnText = submitBtn.innerHTML;
+            submitBtn.innerHTML = "Submitting..........";
+            submitBtn.disabled = true;
+
+            setTimeout(() => {
+                const feedbackPayload = {
+                    Name: fbNameVal,
+                    Feedback: document.getElementById('fbComment').value
+                };
+
+                firebase.database().ref('FEEDBACKS/Users Feedback').push(feedbackPayload)
+                .then(() => {
+                    displayStatus(form, `Dear ${fbNameVal} Your Feedback Is Submitted successfully!<br>Thanks for your feedback!<br>"Dev Aminu"`, true);
+                    form.reset();
+                    setTimeout(() => feedbackFormContainer.classList.remove('show'), 4500);
+                })
+                .catch(err => {
+                    displayStatus(form, "Error: " + err.message, false);
+                })
+                .finally(() => {
+                    submitBtn.innerHTML = initialBtnText;
+                    submitBtn.disabled = false;
+                });
+            }, 1200);
+        });
+
+        // 3. Bug Form Submission Script Node
+        document.getElementById('bugForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const form = e.target;
+            const submitBtn = form.querySelector('button[type="submit"]');
+
+            clearStatus(form);
+
+            if (!navigator.onLine) {
+                displayStatus(form, "Please connect to the internet and try again", false);
+                return;
+            }
+
+            const initialBtnText = submitBtn.innerHTML;
+            submitBtn.innerHTML = "Submitting..........";
+            submitBtn.disabled = true;
+
+            setTimeout(() => {
+                const bugPayload = {
+                    "The Bug is": document.getElementById('bugDescription').value
+                };
+
+                firebase.database().ref('BUG REPORT/Users Bug Report').push(bugPayload)
+                .then(() => {
+                    displayStatus(form, "Your Report is Successfully submitted......<br>Thank you.....", true);
+                    form.reset();
+                    setTimeout(() => bugReportContainer.classList.remove('show'), 3500);
+                })
+                .catch(err => {
+                    displayStatus(form, "Error: " + err.message, false);
+                })
+                .finally(() => {
+                    submitBtn.innerHTML = initialBtnText;
+                    submitBtn.disabled = false;
+                });
+            }, 1200);
+        });
+    </script>
+</body>
+</html>
